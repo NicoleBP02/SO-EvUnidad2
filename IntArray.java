@@ -1,4 +1,4 @@
 public class IntArray {
     public int[] arr;
-    public int lenght;
+    public int length;
 }

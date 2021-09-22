@@ -1,23 +1,32 @@
 public class Problema1 {
     public static void main(String[] args) {
         IntArray myarr = new IntArray();
-    }
-
-    IntArray createIntArray(int size){
-        return 0;
-    }
-    void initIntArray(IntArray this){
+        initIntArray(myarr);
+        printArray(myarr);
 
     }
-    void printArray(IntArray this){
-         for (int i = 0; i < this.length; i++){
-             System.out.printf();
-         }
+
+    IntArray createIntArray(int size) {
+        // Esto no es necesario pues es manejado por el new
+        return null;
     }
-    void destroyIntArray(IntArray this){ 
-        //Java posee un garbage collector que realiza esta tarea
-        //automáticamente
+
+    static void initIntArray(IntArray that) {
+
+        for (int i = 0; i < that.length; i++) {
+            that.arr[i] = i;
+        }
+
+    }
+
+    static void printArray(IntArray that) {
+        for (int i = 0; i < that.length; i++) {
+            System.out.println("that.arr[" + i + "] = " + that.arr[i]);
+        }
+    }
+
+    void destroyIntArray(IntArray that) {
+        // Java posee un garbage collector que realiza esta tarea
+        // automáticamente
     }
 }
-
-
