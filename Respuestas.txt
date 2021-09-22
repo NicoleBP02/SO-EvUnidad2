@@ -1,0 +1,20 @@
+RESPUESTAS EVALUACIÓN UNIDAD 2
+
+Problema 1: análisis y relación
+
+
+* Explica cómo funciona el programa.
+R//: Se importan las librerías, luego se define la estructura IntArray con un puntero tipo int a la dirección del arreglo, y una longitud para el arreglo tipo int. Luego se declaran las funciones para crea, inicializar, destruir/liberar memoria e imprimir. Después está la función main en la cual se hace uso de cada una de las funciones. Las funciones están creadas de la siguiente manera: createIntArray(int size), lo que hace es reservar en memoria dinámica espacio para la estructura IntArray y para el puntero de la estructura, asignar el tamaño y retorna el puntero al espacio de memoria asignado; initIntArray(IntArray *this), teniendo al dirección de memoria de la estructura lo que hace es recorrerla y asignar valores del 0 al 99 (100 posiciones); printArray(IntArray *this), recorre la estructura ubicada en esa posición de memoria e imprime cada posición; destroyIntArray(IntArray *this),libera de la memoria el puntero del arreglo y la estructura.
+
+* Explica en que parte del MAPA DE MEMORIA del proceso se almacena CADA variable usada.
+R//: -> *parr : heap
+     -> lenght : stack
+     -> *pIntArray : heap
+     -> i : stack
+     -> *this: heap 
+
+* Construye una programa similar a este usando Java o C#.
+* Explica en qué parte de la memoria se almacena cada variable de tu programa.
+R//:
+* Compara ambos programas e indica qué conceptos del programa propuesto se ven reflejados en tu programa.
+R//: 
