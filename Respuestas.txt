@@ -11,7 +11,7 @@ R//: -> *parr : heap
      -> lenght : stack
      -> *pIntArray : heap
      -> i : stack
-     -> *this: heap 
+     -> *this: stack
 
 * Construye una programa similar a este usando Java o C#.
 * Explica en qué parte de la memoria se almacena cada variable de tu programa.
