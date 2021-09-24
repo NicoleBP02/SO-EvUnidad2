@@ -15,6 +15,20 @@ R//: -> *parr : heap
 
 * Construye una programa similar a este usando Java o C#.
 * Explica en qué parte de la memoria se almacena cada variable de tu programa.
-R//:
-* Compara ambos programas e indica qué conceptos del programa propuesto se ven reflejados en tu programa.
 R//: 
+     -> myarr : heap (porque la palabra reservada new reserva espacio en el heap y retorna la dirección en mem dinámica)
+     -> that : heap (porque un puntero a la ubicación de un objeto)
+     -> size: stack (variables locales)
+     -> i : stack (variables locales)
+     -> arr: heap (si es del objeto instanciado) -- stack (si se está declarando la estrucutra del objeto)
+     -> lenght: heap  (si es del objeto intanciado) -- stack (si se está declarando la estrucutra del objeto)
+
+* Compara ambos programas e indica qué conceptos del programa propuesto se ven reflejados en tu programa.
+R//: Vemos el concepto del objeto reflejado en el struct en C, que se instancia. Vemos también que para llenar
+las posiciones del arreglo se hace accediendo a una estructura u objeto que está ubicado en la memoria dinámica,
+lo mismo se ve al imprimirla. Notamos que en C se tiene que liberar memoria manualmente, mientras que en Java
+esto se hace automáticamente por medio del garbage collector. Pero se puede también forzar el garbage collector,
+como en C, al dejar de referenciar el objeto/variable, así nos aseguramos de liberar el espacio. 
+También se refleja el malloc de C en la palabra reservada new en Java que se encarga de reservar un espacio en
+memoria dinámica y retornar la dirección de dicha posición, pero lo hace automáticamente y sin nuestra interferencia
+(es invisible, pasa por detrás).
