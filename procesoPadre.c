@@ -8,12 +8,12 @@
 
 int main(int argc, char *argv[]){
 
-    char resultado = 0;
-    int statushijo = 0;
+    int resultado = 0;
+    int statushijo;
 
-    FILE *fin = fopen(argv[1],"r");
+    FILE *fin = fopen("resultadohijo.txt","r");
     if (fin == NULL){
-        perror("Falla en la apertura del archivo de entrada: ");
+        perror("Imagen 2 Falla en la apertura del archivo de entrada: ");
         return(EXIT_FAILURE);
     }
 
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
         printf("No hay elementos en el arreglo");
         EXIT_FAILURE;
     }
-    resultado = token;
+    resultado = atoi(token);
     char *token2;
     token2 = strtok(NULL, "");
     statushijo = atoi(token2);
@@ -38,5 +38,5 @@ int main(int argc, char *argv[]){
     //Una vez teniendo los datos, esperamos al hijo
     wait(statushijo);
 
-    printf("Primer proceso: resultado=%s\n", resultado);
+    printf("Primer proceso: resultado=%d\n", resultado);
 }
