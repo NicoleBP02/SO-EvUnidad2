@@ -9,9 +9,9 @@ int main(int argc, char **argv)
 {
     pid_t pid_hijo;
 
-    printf("Padre argv[1]: %s\n", argv[1]);
     pid_hijo = fork();
-    int status;
+    int status = 0;
+    //int *dirstatus = &status;
 
     switch (pid_hijo)
     {
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 
         FILE *fout = fopen("resultadohijo.txt","r+");
         if (fout == NULL){
-            perror("Falla en la apertura del archivo de salida: ");
+            perror("Principal Falla en la apertura del archivo de salida: ");
             return(EXIT_FAILURE);
         }
         int cont = 0;
@@ -38,18 +38,17 @@ int main(int argc, char **argv)
         }
         fprintf(fout, "%d", suma/cont);
         fprintf(fout, " ");
-        fprintf(fout, "%d",  status);
+        fprintf(fout, "%d", status);
 
         break;
     default:
     { /* Código ejecutado por el padre */
         //DEBE CAMBIAR SU IMAGEN
-        //printf("Padre argv[1]: %d\n", *argv[1]);
         argv[0] = "./procesoPadre";
         execv("./procesoPadre",argv);
         printf("No funciono execv para el padre\n");
         //ESPERAR AL HIJO  
-        wait(&status);
+        //wait(&status);
     }
 
     }
