@@ -10,8 +10,6 @@ int main(int argc, char **argv)
     pid_t pid_hijo;
 
     pid_hijo = fork();
-    int status = 0;
-    //int *dirstatus = &status;
 
     switch (pid_hijo)
     {
@@ -19,9 +17,6 @@ int main(int argc, char **argv)
         printf("Error al crear el proceso");
         return -1;
     case 0: ;/* Código ejecutado por el hijo */
-        //argv[0] = "./variadicaProm";
-        //execv("./variadicaProm",argv);
-
         FILE *fout = fopen("resultadohijo.txt","r+");
         if (fout == NULL){
             perror("Principal Falla en la apertura del archivo de salida: ");
@@ -34,22 +29,16 @@ int main(int argc, char **argv)
         {
             suma+= atoi(argv[i]);
             cont++;
-            //printf("Argv[%d]: %s\n",i,argv[i]);
         }
         fprintf(fout, "%d", suma/cont);
         fprintf(fout, " ");
-        fprintf(fout, "%d", status);
-
         break;
     default:
-    { /* Código ejecutado por el padre */
-        //DEBE CAMBIAR SU IMAGEN
-        argv[0] = "./procesoPadre";
-        execv("./procesoPadre",argv);
-        printf("No funciono execv para el padre\n");
-        //ESPERAR AL HIJO  
-        //wait(&status);
-    }
-
+        { /* Código ejecutado por el padre */
+            //DEBE CAMBIAR SU IMAGEN
+            argv[0] = "./procesoPadre";
+            execv("./procesoPadre",argv);
+            printf("No funciono execv para el padre\n");
+        }
     }
 }

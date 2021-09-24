@@ -17,26 +17,23 @@ int main(int argc, char *argv[]){
         return(EXIT_FAILURE);
     }
 
-    char buffer[32];
+    char buffer[16];
     char *status = NULL;
 
     status = fgets(buffer, sizeof(buffer), fin);
     if (status != NULL)
     {
     char *token;
-    token = strtok(buffer, " "); //strtok es para partir una cadena de caracteres en subcadenas indicando el separador
+    token = strtok(buffer, ""); //strtok es para partir una cadena de caracteres en subcadenas indicando el separador
     if (token == NULL)
     {
         printf("No hay elementos en el arreglo");
         EXIT_FAILURE;
     }
     resultado = atoi(token);
-    char *token2;
-    token2 = strtok(NULL, "");
-    statushijo = atoi(token2);
     }
     //Una vez teniendo los datos, esperamos al hijo
-    wait(statushijo);
+    wait(&statushijo);
 
     printf("Primer proceso: resultado=%d\n", resultado);
 }
