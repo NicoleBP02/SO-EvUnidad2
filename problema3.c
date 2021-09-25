@@ -12,7 +12,9 @@ void vowels(char *buffer);
 void *procesohilo(void *param);
 void ECHOoff();
 
+// Declaracion de variable que funcionara como switch de manera global
 int conv = 4;
+
 int main(int argc, char **argv)
 {
     ECHOoff();
@@ -22,14 +24,13 @@ int main(int argc, char **argv)
         perror("Imagen 2 Falla en la apertura del archivo de entrada: ");
         return (EXIT_FAILURE);
     }
-    //int *conv = malloc(sizeof(int));
-    //*conv = 4;
 
     pthread_t threadID;
-    pthread_create(&threadID, NULL, &procesohilo, NULL); //REVISAR LOS PARAMETROS
+    pthread_create(&threadID, NULL, &procesohilo, NULL);
 
     char buffer[256];
     char *status = NULL;
+    // Leer todo el archivo e imprimir segun el conv
     do
     {
         status = fgets(buffer, sizeof(buffer), fin);
@@ -41,21 +42,18 @@ int main(int argc, char **argv)
                 printf("Original: %s", buffer);
                 //procesa UPPER
                 upper(buffer);
-                //printf("Procesado (upper): %s", buffer);
                 sleep(1);
                 break;
             case 2: //Words
                 printf("Original: %s", buffer);
                 //procesa words
                 words(buffer);
-                //printf("Procesado (words): %s", buffer);
                 sleep(1);
                 break;
             case 3: //Vowels
                 printf("Original: %s", buffer);
                 //procesa vowels
                 vowels(buffer);
-                //printf("Procesado (vowels): %s", buffer);
                 sleep(1);
                 break;
             default: //none
@@ -65,7 +63,6 @@ int main(int argc, char **argv)
             }
         }
     } while (status != NULL);
-    //printf("\n");
 }
 
 void upper(char *buffer) //1
@@ -106,24 +103,23 @@ void vowels(char *cadena) //3
     printf("Procesada (cantidad de vocales): %d\n", vocales);
 }
 void *procesohilo(void *param)
-{   
+{
     ECHOoff();
     char respuesta[16];
-    //int conv = *((int *)param);
     while (1)
     {
-        // printf("Esperando conversion");
-        //printf("\n\n%d\n\n", conv);
         scanf("%s", respuesta);
-        printf("------------------------Respuesta %s ----------------------------------\n", respuesta);
-        /*for (int i = 0; respuesta[i] != '\0'; ++i)
+        // printf("------------------------Respuesta %s ----------------------------------\n", respuesta);
+        for (int i = 0; respuesta[i] != '\0'; ++i)
         {
-		    char letraActual = tolower(respuesta[i]);
-	    }*/
+            respuesta[i] = tolower(respuesta[i]);
+        }
+        // Compara la entrada con los metodos de escritura
         int eqUpper = strcmp(respuesta, "upper");
         int eqWords = strcmp(respuesta, "words");
         int eqVowels = strcmp(respuesta, "vowels");
 
+        // Cambia el valor de conv segun la entrada de usuario
         if (eqUpper == 0)
         {
             conv = 1;
@@ -143,13 +139,11 @@ void *procesohilo(void *param)
     }
     return NULL;
 }
-void ECHOoff(){
+void ECHOoff()
+{
     struct termios term;
     tcgetattr(fileno(stdin), &term);
 
     term.c_lflag &= ~ECHO;
     tcsetattr(fileno(stdin), 0, &term);
-
-    //term.c_lflag |= ECHO;
-    //tcsetattr(fileno(stdin), 0, &term);
 }
