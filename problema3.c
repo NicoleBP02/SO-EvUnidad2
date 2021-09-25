@@ -6,7 +6,9 @@
 #include <pthread.h>
 
 void upper(char *buffer);
-void contarPalabras(char *buffer);
+void words(char *buffer);
+void vowels(char *buffer);
+void* procesohilo(char *buffer);
 
 int main(int argc, char **argv)
 {
@@ -17,7 +19,9 @@ int main(int argc, char **argv)
         return (EXIT_FAILURE);
     }
 
-    char buffer[256];
+    pthread_t threadID;
+
+    char buffer[256]; //REVISAR BUFFER PARA USARLO EN OTRAS FUNCIONES
     char *status = NULL;
     do
     {
@@ -27,6 +31,9 @@ int main(int argc, char **argv)
             printf("Original: %s", buffer);
             sleep(1);
         }
+
+        pthread_create(&threadID,NULL,&procesohilo,&buffer); //REVISAR LOS PARAMETROS
+
     } while (status != NULL);
     //printf("\n");
 }
@@ -40,7 +47,7 @@ void upper(char *buffer)
     printf("Procesada (UPPER): %s\n", buffer);
 }
 
-void contarPalabras(char *buffer)
+void words(char *buffer)
 {
     int contador = 0;
     int largo = strlen(buffer);
@@ -55,7 +62,7 @@ void contarPalabras(char *buffer)
     printf("Procesada (cantidad de palabras): %d \n", contador);
 }
 
-void contarVocales(char *cadena)
+void vowels(char *cadena)
 {
 	int vocales = 0;
 	for (int indice = 0; cadena[indice] != '\0'; ++indice)
@@ -67,4 +74,8 @@ void contarVocales(char *cadena)
 		}
 	}
 	printf("Procesada (cantidad de vocales): %d \n", vocales);
+}
+void* procesohilo(char *buffer)
+{
+    
 }
