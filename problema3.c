@@ -8,8 +8,7 @@
 void upper(char *buffer);
 void words(char *buffer);
 void vowels(char *buffer);
-void* procesohilo(void *param);
-
+void *procesohilo(void *param);
 
 int main(int argc, char **argv)
 {
@@ -23,7 +22,7 @@ int main(int argc, char **argv)
     *conv = 2;
 
     pthread_t threadID;
-    pthread_create(&threadID,NULL,&procesohilo,&conv); //REVISAR LOS PARAMETROS
+    pthread_create(&threadID, NULL, &procesohilo, &conv); //REVISAR LOS PARAMETROS
 
     char buffer[256];
     char *status = NULL;
@@ -91,24 +90,25 @@ void words(char *buffer) //2
 
 void vowels(char *cadena) //3
 {
-	int vocales = 0;
-	for (int indice = 0; cadena[indice] != '\0'; ++indice)
+    int vocales = 0;
+    for (int indice = 0; cadena[indice] != '\0'; ++indice)
     {
-		char letraActual = tolower(cadena[indice]);
-		if (letraActual == 'a' || letraActual == 'e' || letraActual == 'i' || letraActual == 'o' || letraActual == 'u')
-		{
-			vocales++;
-		}
-	}
-	printf("Procesada (cantidad de vocales): %d \n", vocales);
+        char letraActual = tolower(cadena[indice]);
+        if (letraActual == 'a' || letraActual == 'e' || letraActual == 'i' || letraActual == 'o' || letraActual == 'u')
+        {
+            vocales++;
+        }
+    }
+    printf("Procesada (cantidad de vocales): %d \n", vocales);
 }
-void* procesohilo(void *param)
+void *procesohilo(void *param)
 {
     char respuesta[16];
-    int conv = *((int*) param);
+    int conv = *((int *)param);
     while (1)
     {
-        //printf("Esperando conversion");
+        // printf("Esperando conversion");
+        printf("\n\n%d\n\n", conv);
         scanf("%s", respuesta);
         /*for (int i = 0; respuesta[i] != '\0'; ++i)
         {
@@ -130,7 +130,8 @@ void* procesohilo(void *param)
         {
             conv = 3;
         }
-        else{
+        else
+        {
             conv = 4; //NONE
         }
     }
