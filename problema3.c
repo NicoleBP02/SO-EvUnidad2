@@ -13,7 +13,7 @@ void *procesohilo(void *param);
 void ECHOoff();
 
 // Declaracion de variable que funcionara como switch de manera global
-int conv = 4;
+int conv = 5;
 
 int main(int argc, char **argv)
 {
@@ -56,7 +56,11 @@ int main(int argc, char **argv)
                 vowels(buffer);
                 sleep(1);
                 break;
-            default: //none
+            case 4: //None
+                printf("%s", buffer);
+                sleep(1);
+                break;
+            default:
                 printf("%s", buffer);
                 sleep(1);
                 break;
@@ -118,6 +122,7 @@ void *procesohilo(void *param)
         int eqUpper = strcmp(respuesta, "upper");
         int eqWords = strcmp(respuesta, "words");
         int eqVowels = strcmp(respuesta, "vowels");
+        int eqNone = strcmp(respuesta, "none");
 
         // Cambia el valor de conv segun la entrada de usuario
         if (eqUpper == 0)
@@ -132,9 +137,9 @@ void *procesohilo(void *param)
         {
             conv = 3;
         }
-        else
+        else if (eqNone == 0)
         {
-            conv = 4; //NONE
+            conv = 4;
         }
     }
     return NULL;
