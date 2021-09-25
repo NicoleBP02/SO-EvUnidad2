@@ -4,14 +4,17 @@
 #include <ctype.h>
 #include <string.h>
 #include <pthread.h>
+#include <termios.h>
 
 void upper(char *buffer);
 void words(char *buffer);
 void vowels(char *buffer);
 void *procesohilo(void *param);
+void ECHOoff();
 
 int main(int argc, char **argv)
 {
+    ECHOoff();
     FILE *fin = fopen(argv[1], "r");
     if (fin == NULL)
     {
@@ -19,7 +22,7 @@ int main(int argc, char **argv)
         return (EXIT_FAILURE);
     }
     int *conv = malloc(sizeof(int));
-    *conv = 2;
+    *conv = 4;
 
     pthread_t threadID;
     pthread_create(&threadID, NULL, &procesohilo, &conv); //REVISAR LOS PARAMETROS
@@ -101,15 +104,17 @@ void vowels(char *cadena) //3
     }
     printf("Procesada (cantidad de vocales): %d \n", vocales);
 }
-void *procesohilo(void *param)
-{
+void *procesohilo(void *conv)
+{   
+    ECHOoff();
     char respuesta[16];
-    int conv = *((int *)param);
+    //int conv = *((int *)param);
     while (1)
     {
         // printf("Esperando conversion");
         printf("\n\n%d\n\n", conv);
         scanf("%s", respuesta);
+        printf("------------------------Respuesta %s ----------------------------------\n", respuesta);
         /*for (int i = 0; respuesta[i] != '\0'; ++i)
         {
 		    char letraActual = tolower(respuesta[i]);
@@ -136,4 +141,14 @@ void *procesohilo(void *param)
         }
     }
     return NULL;
+}
+void ECHOoff(){
+    struct termios term;
+    tcgetattr(fileno(stdin), &term);
+
+    term.c_lflag &= ~ECHO;
+    tcsetattr(fileno(stdin), 0, &term);
+
+    //term.c_lflag |= ECHO;
+    //tcsetattr(fileno(stdin), 0, &term);
 }
