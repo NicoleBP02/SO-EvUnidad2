@@ -12,6 +12,7 @@ void vowels(char *buffer);
 void *procesohilo(void *param);
 void ECHOoff();
 
+int conv = 4;
 int main(int argc, char **argv)
 {
     ECHOoff();
@@ -21,11 +22,11 @@ int main(int argc, char **argv)
         perror("Imagen 2 Falla en la apertura del archivo de entrada: ");
         return (EXIT_FAILURE);
     }
-    int *conv = malloc(sizeof(int));
-    *conv = 4;
+    //int *conv = malloc(sizeof(int));
+    //*conv = 4;
 
     pthread_t threadID;
-    pthread_create(&threadID, NULL, &procesohilo, &conv); //REVISAR LOS PARAMETROS
+    pthread_create(&threadID, NULL, &procesohilo, NULL); //REVISAR LOS PARAMETROS
 
     char buffer[256];
     char *status = NULL;
@@ -34,27 +35,27 @@ int main(int argc, char **argv)
         status = fgets(buffer, sizeof(buffer), fin);
         if (status != NULL)
         {
-            switch (*conv)
+            switch (conv)
             {
             case 1: //Upper
                 printf("Original: %s", buffer);
                 //procesa UPPER
                 upper(buffer);
-                printf("Procesado (upper): %s", buffer);
+                //printf("Procesado (upper): %s", buffer);
                 sleep(1);
                 break;
             case 2: //Words
                 printf("Original: %s", buffer);
                 //procesa words
                 words(buffer);
-                printf("Procesado (words): %s", buffer);
+                //printf("Procesado (words): %s", buffer);
                 sleep(1);
                 break;
             case 3: //Vowels
                 printf("Original: %s", buffer);
                 //procesa vowels
                 vowels(buffer);
-                printf("Procesado (vowels): %s", buffer);
+                //printf("Procesado (vowels): %s", buffer);
                 sleep(1);
                 break;
             default: //none
@@ -73,7 +74,7 @@ void upper(char *buffer) //1
     {
         buffer[i] = toupper(buffer[i]);
     }
-    printf("Procesada (UPPER): %s\n", buffer);
+    printf("Procesada (UPPER): %s", buffer);
 }
 
 void words(char *buffer) //2
@@ -88,7 +89,7 @@ void words(char *buffer) //2
             contador++;
         }
     }
-    printf("Procesada (cantidad de palabras): %d \n", contador);
+    printf("Procesada (cantidad de palabras): %d\n", contador);
 }
 
 void vowels(char *cadena) //3
@@ -102,9 +103,9 @@ void vowels(char *cadena) //3
             vocales++;
         }
     }
-    printf("Procesada (cantidad de vocales): %d \n", vocales);
+    printf("Procesada (cantidad de vocales): %d\n", vocales);
 }
-void *procesohilo(void *conv)
+void *procesohilo(void *param)
 {   
     ECHOoff();
     char respuesta[16];
@@ -112,7 +113,7 @@ void *procesohilo(void *conv)
     while (1)
     {
         // printf("Esperando conversion");
-        printf("\n\n%d\n\n", conv);
+        //printf("\n\n%d\n\n", conv);
         scanf("%s", respuesta);
         printf("------------------------Respuesta %s ----------------------------------\n", respuesta);
         /*for (int i = 0; respuesta[i] != '\0'; ++i)
