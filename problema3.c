@@ -17,7 +17,6 @@ int conv = 5;
 
 int main(int argc, char **argv)
 {
-    ECHOoff();
     FILE *fin = fopen(argv[1], "r");
     if (fin == NULL)
     {
