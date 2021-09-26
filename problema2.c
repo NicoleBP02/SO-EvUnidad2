@@ -31,7 +31,6 @@ int main(int argc, char **argv)
             cont++;
         }
         fprintf(fout, "%d", suma/cont);
-        fprintf(fout, " ");
         break;
     default:
         { /* Código ejecutado por el padre */
