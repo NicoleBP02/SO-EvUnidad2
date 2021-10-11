@@ -11,6 +11,9 @@ int main(int argc, char *argv[]){
     int resultado = 0;
     int statushijo;
 
+    //Esperamos al hijo antes de abrir el archivo
+    wait(&statushijo);
+
     FILE *fin = fopen("resultadohijo.txt","r");
     if (fin == NULL){
         perror("Imagen 2 Falla en la apertura del archivo de entrada: ");
@@ -32,8 +35,5 @@ int main(int argc, char *argv[]){
     }
     resultado = atoi(token);
     }
-    //Una vez teniendo los datos, esperamos al hijo
-    wait(&statushijo);
-
     printf("Primer proceso: resultado=%d\n", resultado);
 }
